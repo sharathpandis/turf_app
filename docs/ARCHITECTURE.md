@@ -8,7 +8,9 @@ Next.js (App Router) + TypeScript strict, Tailwind CSS, shadcn/ui (not yet insta
 
 ## Folder structure
 Current:
-- `app/` — Next.js routes (still the starter page)
+- `app/` — Next.js routes (starter page, placeholder `login`)
+- `proxy.ts` — route guard: signed-out visitors go to `/login`
+- `lib/supabase/` — `client.ts` (browser), `server.ts` (server), `proxy.ts` (session refresh helper)
 - `docs/` — requirements, progress, architecture, database
 - `supabase/` — `config.toml`, `migrations/` (5 files), `seed.sql`
 - `lib/database.types.ts` — generated types

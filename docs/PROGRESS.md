@@ -11,7 +11,7 @@ Phase 1A (owner app). Database schema live on the remote dev project (turf-app-d
 - 2026-11-06 — Project setup: Next.js app created, Supabase project linked (`supabase/config.toml`), `.env.local` set, CLAUDE.md and `docs/requirements.md` added.
 
 ## In progress / blockers
-- None.
+- S1.3 built (clients, `proxy.ts`, placeholder `/login`); lint and build pass; signed-out redirects verified. Not ticked: the signed-in path (session refresh, `/login` -> `/`) can only be tested once S1.4 creates a login.
 
 ## Decisions
 - 2026-11-06 — Phase 1A is owner app only; WhatsApp calls are logged stubs in `lib/notify/`. Reason: bot needs Meta verification and is a later phase.
@@ -20,6 +20,7 @@ Phase 1A (owner app). Database schema live on the remote dev project (turf-app-d
 - 2026-11-06 — Removed staff role from Phase 1. Reason: Keep Phase 1 simple. Only owner and super admin log in; `members` table stays (role 'owner' only) so staff can return later.
 
 - 2026-11-10 — Overlap rule lives on a `court_occupancy` table kept in sync by triggers. Reason: an exclusion constraint cannot span the bookings and blocks tables.
+- 2026-11-10 — Route guard is `proxy.ts`, not `middleware.ts`. Reason: Next.js 16 renamed the convention.
 - 2026-11-10 — Dropped `eslint-config-next` mismatch by upgrading it to 16.4.5 to match `next`. Reason: lint was broken.
 
 ## Known issues / tech debt

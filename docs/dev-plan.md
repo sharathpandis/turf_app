@@ -41,7 +41,7 @@ Goal: an owner can log in on a phone and land on an empty home screen, backed by
 
 - [x] **S1.1 Database schema** — tables, double-booking constraint, RLS, seed. Approve plan, then `supabase db push`, generate types. (2026-11-10)
 - [x] **S1.2 Prove the overlap rule** — in the SQL Editor, an overlapping booking and a booking over a block must both fail. (2026-11-10)
-- [ ] **S1.3 Supabase client setup** — browser + server clients, middleware that refreshes the session and protects owner pages.
+- [ ] **S1.3 Supabase client setup** — browser + server clients, middleware (Next 16: `proxy.ts`) that refreshes the session and protects owner pages.
 - [ ] **S1.4 Login (screen 1)** — phone OTP with a Supabase test number; first login creates owner + member rows.
 - [ ] **S1.5 App shell** — bottom nav (Calendar, Requests, Customers, More), header with turf switcher, PWA manifest + icons, "Add to Home Screen" works.
 - [ ] **S1.6 Deploy** — connect the repo to Vercel, add env variables, preview links per branch.
