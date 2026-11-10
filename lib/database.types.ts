@@ -318,6 +318,7 @@ export type Database = {
       }
       members: {
         Row: {
+          email: string | null
           id: string
           owner_id: string
           phone: string | null
@@ -325,6 +326,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          email?: string | null
           id?: string
           owner_id: string
           phone?: string | null
@@ -332,6 +334,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          email?: string | null
           id?: string
           owner_id?: string
           phone?: string | null
@@ -351,6 +354,7 @@ export type Database = {
       owners: {
         Row: {
           created_at: string
+          email: string | null
           id: string
           name: string
           phone: string
@@ -358,6 +362,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          email?: string | null
           id?: string
           name?: string
           phone?: string
@@ -365,6 +370,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          email?: string | null
           id?: string
           name?: string
           phone?: string

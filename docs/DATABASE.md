@@ -1,9 +1,9 @@
 # Database
 
-Built from `supabase/migrations/` (5 files, applied to local and to the remote dev project `turf-app-dev`). Seed data: `supabase/seed.sql` (local only).
+Built from `supabase/migrations/` (7 files, applied to local and to the remote dev project `turf-app-dev`). Seed data: `supabase/seed.sql` (local only).
 
 ## Tables
-- **owners** — one per business: name, phone, status (active/inactive). Created by the first-login trigger.
+- **owners** — one per business: name, phone, email, status (active/inactive). Created by the first-login trigger.
 - **members** — which auth user belongs to which owner. `role` allows only `'owner'` in Phase 1 (staff may return later).
 - **super_admins** — auth users who are our team (read access to everything).
 - **turfs** — owner's turf: booking code, UPI, hold minutes, approval mode, advance rule, cancellation text, reminder and summary settings. Belongs to an owner.
@@ -27,7 +27,7 @@ RLS is on for every table.
 - **Super admin:** read-only on everything. Activating/deactivating an owner is done from server code with the service-role key (S6.3).
 - **Anon:** no access.
 - An inactive owner loses access (the helper only returns active owners).
-- First login (phone OTP creates an auth user) creates an owner and a `members` row automatically.
+- First login creates an owner and a `members` row automatically, when the email (or phone) is confirmed, i.e. the OTP is verified, not when an OTP is requested. The email is copied to `owners.email` and `members.email`.
 
 ## Cron jobs
 None yet (hold expiry is S4.2).

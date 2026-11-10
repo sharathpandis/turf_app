@@ -11,7 +11,7 @@ UPI and the owner confirms it. Target: build in 8 weeks, pilot with 5 turfs in w
 Phase 1 solves the owner's daily problem: double bookings, missed advances and no-
 shows. Everything players do happens through WhatsApp messages the system sends.
 ## In scope
-1. Owner sign-up and login with phone OTP.
+1. Owner sign-up and login with email OTP (phone OTP later).
 2. Turf and court setup: hours, slot length, prices, peak/off-peak, slot tags.
 3. Calendar per court (day and week view).
 4. Add, edit, reschedule and cancel bookings (phone, walk-in, WhatsApp bot, other app).
@@ -71,7 +71,7 @@ messages
 —
 
 1. Login (P0)
-Phone number + OTP; first login creates an owner account.
+Email + OTP code (phone OTP later, once an SMS provider is chosen); first login creates an owner account.
 Done when: a new owner reaches the setup wizard in under 1 minute; an uninvited
 number cannot access any turf.
 2. Setup wizard (P0)
@@ -417,7 +417,7 @@ Part Choice
 Frontend (owner, admin) Next.js (App Router) + TypeScript, installable as a
 PWA
 UI Tailwind CSS + shadcn/ui
-Database, auth, storage Supabase (PostgreSQL, phone OTP, file storage for
+Database, auth, storage Supabase (PostgreSQL, email OTP, file storage for
 QR/photos)
 Server logic Supabase Edge Functions (WhatsApp webhook for
 the bot + message sending) + database functions

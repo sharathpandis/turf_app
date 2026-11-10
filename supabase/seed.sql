@@ -2,12 +2,12 @@
 -- 5 bookings, 1 block. Dates are relative to today so the calendar always has data.
 
 insert into auth.users (
-  instance_id, id, aud, role, phone, phone_confirmed_at,
+  instance_id, id, aud, role, email, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at
 ) values (
   '00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111',
-  'authenticated', 'authenticated', '919999900001', now(),
-  '{"provider":"phone","providers":["phone"]}', '{}', now(), now()
+  'authenticated', 'authenticated', 'owner@example.com', now(),
+  '{"provider":"email","providers":["email"]}', '{}', now(), now()
 );
 
 -- the trigger created the owner + member; name the owner

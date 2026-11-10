@@ -12,7 +12,7 @@ Full spec: `docs/requirements.md`. Read ONLY the section named in the task, not 
 ## Stack
 - Next.js (App Router) + TypeScript (strict)
 - Tailwind CSS + shadcn/ui (no other UI libraries without asking)
-- Supabase: Postgres, Auth (phone OTP), Storage, Realtime
+- Supabase: Postgres, Auth (email OTP; phone OTP later), Storage, Realtime
 - Hosting: Vercel + Supabase
 
 ## Rules that must never break

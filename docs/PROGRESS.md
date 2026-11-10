@@ -10,8 +10,11 @@ Phase 1A (owner app). Database schema live on the remote dev project (turf-app-d
 - 2026-11-10 — S1.1 Database schema: 12 tables, overlap rule, RLS, first-login trigger, audit trail, seed; pushed to turf-app-dev; types generated. Files: `supabase/migrations/*`, `supabase/seed.sql`, `lib/database.types.ts`.
 - 2026-11-06 — Project setup: Next.js app created, Supabase project linked (`supabase/config.toml`), `.env.local` set, CLAUDE.md and `docs/requirements.md` added.
 
+## Done (S1.3, S1.4 — 2026-11-10)
+- Supabase clients, `proxy.ts` route guard, and email OTP login (Gmail custom SMTP on dev). Verified: code email arrives, login works, owner + members rows created with email.
+
 ## In progress / blockers
-- S1.3 built (clients, `proxy.ts`, placeholder `/login`); lint and build pass; signed-out redirects verified. Not ticked: the signed-in path (session refresh, `/login` -> `/`) can only be tested once S1.4 creates a login.
+- None. Next: S1.5 app shell, then S1.6 Vercel deploy.
 
 ## Decisions
 - 2026-11-06 — Phase 1A is owner app only; WhatsApp calls are logged stubs in `lib/notify/`. Reason: bot needs Meta verification and is a later phase.
@@ -20,10 +23,13 @@ Phase 1A (owner app). Database schema live on the remote dev project (turf-app-d
 - 2026-11-06 — Removed staff role from Phase 1. Reason: Keep Phase 1 simple. Only owner and super admin log in; `members` table stays (role 'owner' only) so staff can return later.
 
 - 2026-11-10 — Overlap rule lives on a `court_occupancy` table kept in sync by triggers. Reason: an exclusion constraint cannot span the bookings and blocks tables.
+- 2026-11-10 — Owner login is email OTP, not phone OTP (phone later). Reason: no SMS provider available yet.
+- 2026-11-10 — Owner account is created when the email is confirmed (OTP verified), not when an OTP is requested. Reason: stops junk owner rows from unverified addresses.
 - 2026-11-10 — Route guard is `proxy.ts`, not `middleware.ts`. Reason: Next.js 16 renamed the convention.
 - 2026-11-10 — Dropped `eslint-config-next` mismatch by upgrading it to 16.4.5 to match `next`. Reason: lint was broken.
 
 ## Known issues / tech debt
+- Do NOT run a full `supabase config push --remote`: local config.toml differs from the remote in ~15 unrelated settings (email, MFA, pooler, storage). Change phone auth in the dashboard, or push a minimal config after checking `supabase config diff --remote`.
 - Sprint 4 of dev-plan.md includes the WhatsApp bot, but CLAUDE.md says no WhatsApp yet; revisit when Sprint 4 starts.
 - Stack packages from CLAUDE.md not installed yet (shadcn/ui, Supabase client, zod, test runner).
 - Remote dev project has no seed data (seed runs locally only).

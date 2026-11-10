@@ -8,7 +8,7 @@ Done:
 - Database schema with double-booking protection and row-level security
 
 Planned:
-- Phone OTP login, setup wizard, courts and pricing
+- Email OTP login, setup wizard, courts and pricing
 - Calendar, add/edit/cancel bookings, block slots, payments
 - Customers, reports, super admin
 - WhatsApp bot and messages (later phase)
