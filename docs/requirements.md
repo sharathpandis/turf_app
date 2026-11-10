@@ -3,7 +3,7 @@
 Phase 1 Requirements – Turf Owner Booking
 App
  Nov 5, 2026  ·  @Sharath
-Phase 1 has two parts: an owner app where owners and staff manage every booking in one
+Phase 1 has two parts: an owner app where owners manage every booking in one
 calendar, and a WhatsApp booking bot where players see free slots and book by chat. No
 player app and no payment gateway in this phase; players pay the advance to the owner's
 UPI and the owner confirms it. Target: build in 8 weeks, pilot with 5 turfs in weeks 9–10.
@@ -26,12 +26,12 @@ the advance, or auto-confirm if the owner turns off advance.
 11. WhatsApp confirmation, reminder and cancellation messages to the player.
 12. Owner alerts on WhatsApp for new bot requests, plus a daily summary.
 13. Basic reports: revenue, occupancy, no-shows, bookings by source.
-14. Staff login with limited access.
-15. Super admin page for our team.
+14. Super admin page for our team.
 Also in scope: safe use alongside other booking software (Playo, Hudle, others) without
 double bookings — see "Working with existing booking software".
 ## Out of scope (later phases)
 Player mobile app or player login.
+Staff access (staff login with limited permissions); may return in a later phase.
 
 Payment gateway and automatic payment confirmation (owner confirms UPI advance
 by hand).
@@ -41,7 +41,7 @@ Public turf pages, Google "Book" link, city directory.
 Academy batches, memberships, leagues, tournaments.
 Subscription billing inside the app (pilot is free).
 ## Users and roles
-Three roles log in to the app; the player never logs in and uses only WhatsApp.
+Two roles log in to the app: owner and super admin. The player never logs in and uses only WhatsApp.
 One owner can have several turfs, and one turf can have several courts (e.g., 2 football
 turfs + 1 pickleball court).
 Screens and functional requirements
@@ -53,17 +53,8 @@ Owner Yes (phone
 OTP)
 Everything for their own turfs:
 setup, prices, bookings,
-reports, staff
+reports
 See other owners' data
-Staff Yes (phone OTP,
-invited by
-owner)
-View calendar, add/edit
-bookings, block slots, record
-payments, check-in
-Change prices or turf
-settings, see reports,
-manage staff
 Super admin
 (our team)
 Yes View all owners, turfs and
@@ -81,7 +72,6 @@ messages
 
 1. Login (P0)
 Phone number + OTP; first login creates an owner account.
-Staff log in with the number the owner invited.
 Done when: a new owner reaches the setup wizard in under 1 minute; an uninvited
 number cannot access any turf.
 2. Setup wizard (P0)
@@ -97,7 +87,7 @@ status (unpaid, advance paid, fully paid), source colour.
 Tap a free slot → Add booking; tap a booked slot → Booking detail.
 Date picker, "Today" button, swipe for next/previous day.
 Done when: the owner sees today's full schedule for a court in one screen on a 6-inch
-phone, and the view updates within 3 seconds when staff add a booking on another
+phone, and the view updates within 3 seconds when a booking is added on another
 phone.
 4. Add / edit booking (P0)
 Fields: court, date, start time, duration (1 or more slots), customer phone (auto-fills
@@ -135,11 +125,10 @@ Done when: price on Add booking matches the band for that day and time.
 Today / this week / this month: total bookings, revenue collected, pending balance,
 occupancy % by court and by hour, no-shows, bookings by source.
 Done when: report totals match the sum of bookings for the period.
-10. Staff and settings (P1)
-Invite staff by phone number; remove staff.
+10. Settings (P1)
 Settings: UPI ID / QR, advance rule (fixed amount or %), cancellation policy text,
 reminder timing, daily summary on/off and time.
-Done when: removed staff lose access immediately.
+Done when: a changed setting applies to the next booking immediately.
 11. Super admin (P0)
 List of owners and turfs with status, bookings per day, messages sent.
 
@@ -164,7 +153,7 @@ Done when: a new player books a slot in under 60 seconds using only taps; two
 players picking the same slot at once → only the first gets it, the second sees "Just
 taken — pick another".
 13. Booking requests — owner side (P0)
-New bot booking → owner and staff get a WhatsApp alert and an in-app badge.
+New bot booking → the owner gets a WhatsApp alert and an in-app badge.
 Requests list: player name, phone, court, time, amount due, payment screenshot (if
 sent), time left on hold.
 Actions: Confirm (advance received), Confirm without advance, Reject (with
@@ -187,7 +176,7 @@ No bookings in the past, except the owner may log a walk-in for the current slot
 Double-booking prevention
 Database constraint on (court, time range) for bookings with status Pending payment,
 Confirmed, Checked-in or Completed, and for blocks.
-If two staff save the same slot at the same moment, the second save fails with "Slot
+If two phones save the same slot at the same moment, the second save fails with "Slot
 just got booked — refresh".
 Cancelled, Rejected, Expired and No-show bookings free the slot. A job runs every
 minute to expire unconfirmed Pending payment bookings.
@@ -198,7 +187,7 @@ Owner can override the price on a booking; the override is recorded.
 Advance and payments
 Owner sets an advance rule: fixed amount (e.g., ₹ 300) or % of price, or none.
 Payment status is calculated: Unpaid → Advance paid → Fully paid.
-Each payment is recorded with amount, mode (cash/UPI), time and staff name. No
+Each payment is recorded with amount, mode (cash/UPI), time and who recorded it. No
 online gateway in Phase 1.
 Booking statuses
 Status Meaning Next possible status
@@ -252,7 +241,7 @@ No-show Team didn't come; counts on customer
 record
 —
 
-When a Playo/Hudle/other booking comes in, the owner or staff blocks that slot in 2
+When a Playo/Hudle/other booking comes in, the owner blocks that slot in 2
 taps ("Block → source: Playo").
 A WhatsApp shortcut to the owner number also works: forward or type "block 7pm
 court 2" (P1).
@@ -312,8 +301,7 @@ Cancelled, Rejected or
 Expired
 Date/time, reason, refund
 note, "book again" button
-New booking request Owner +
-staff
+New booking request Owner
 Player books through the
 bot
 Player name, phone, court,
@@ -362,7 +350,7 @@ Table Key fields Notes
 owners id, name, phone, status
 (active/inactive), created_at
 One per business
-members id, owner_id, user_id, role (owner/staff),
+members id, owner_id, user_id, role (owner only in Phase 1; staff may return later),
 phone
 Who can log in to which owner
 account
@@ -418,7 +406,7 @@ Non-functional requirements
 Mobile-first: every screen works on a 6-inch Android phone over 4G; key actions in 2
 taps.
 Speed: calendar loads in under 2 seconds; saving a booking under 1 second.
-Data privacy: Row Level Security on every table; an owner or staff can only reach
+Data privacy: Row Level Security on every table; an owner can only reach
 their own owner account's data.
 Secrets: WhatsApp and service keys only in Edge Functions, never in the browser.
 Reliability: a failed message never blocks or loses a booking; daily database backups.
@@ -426,7 +414,7 @@ Language: English UI in Phase 1; text kept in one file so Tamil/Hindi can be add
 Testing: automated tests for overlap prevention, pricing bands, payment status and
 reminder timing.
 Part Choice
-Frontend (owner, staff, admin) Next.js (App Router) + TypeScript, installable as a
+Frontend (owner, admin) Next.js (App Router) + TypeScript, installable as a
 PWA
 UI Tailwind CSS + shadcn/ui
 Database, auth, storage Supabase (PostgreSQL, phone OTP, file storage for
@@ -456,7 +444,7 @@ verification, get the platform number, submit templates.
 4. Weeks 5–6: WhatsApp bot: webhook, chat sessions, menu, book flow, my bookings,
 cancel; booking requests screen and hold expiry.
 5. Week 7: confirmation, reminder, cancellation, owner alerts, daily summary.
-6. Week 8: staff access, customers, reports, super admin; testing (especially two players
+6. Week 8: customers, reports, super admin; testing (especially two players
 booking the same slot).
 7. Weeks 9–10: pilot with 5 turfs (one small turf, one Playo/Hudle-listed turf, one
 pickleball court), daily fixes.
@@ -473,5 +461,4 @@ Launch city and the 5 pilot turfs?
 Which WhatsApp provider / API did the internal team use, and can we reuse it?
 App and brand name, domain?
 Do owners need a Tamil or Hindi interface in the pilot?
-Should staff see customer phone numbers?
 Who gives Meta verification documents (company GST, website, address proof)?

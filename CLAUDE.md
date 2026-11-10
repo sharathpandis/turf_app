@@ -1,6 +1,6 @@
 # Turf Owner Booking App
 
-Booking system for turf owners. Owners and staff manage every booking (phone, walk-in, other apps) in one calendar on their phone. Later, players book through a WhatsApp bot.
+Booking system for turf owners. Owners manage every booking (phone, walk-in, other apps) in one calendar on their phone. Later, players book through a WhatsApp bot.
 
 ## Current focus
 Phase 1A: the **owner app only** (installable PWA, used on mobile).
@@ -39,6 +39,13 @@ Full spec: `docs/requirements.md`. Read ONLY the section named in the task, not 
 - Write tests for booking logic (overlap, pricing bands, payment status).
 - Don't add packages without saying why.
 - Keep replies short. Don't repeat unchanged code.
+- Start each session with /start; finish each feature with /done.
+- docs/PROGRESS.md is the source of truth for project state.
+- Never store secrets or key values in any doc.
+- docs/dev-plan.md is the task checklist and the source of truth for what to build next.
+- When a task is finished and its "Done when" is met, change "- [ ]" to "- [x]" and add the date at the end of the line.
+- If a schema change, flow change or new decision changes any task (adds, removes, splits or reorders tasks, or changes a prompt or "Done when"), update dev-plan.md in the same session and add a line to its Change log. Ask me before removing a task.
+- Never tick a task that isn't fully working.
 
 ## Commands
 - `npm run dev` start app
