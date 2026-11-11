@@ -3,6 +3,8 @@
 Built from `supabase/migrations/` (7 files, applied to local and to the remote dev project `turf-app-dev`). Seed data: `supabase/seed.sql` (local only).
 
 ## Tables
+Full table list, columns and relation diagram: `docs/SCHEMA.md`.
+
 - **owners** — one per business: name, phone, email, status (active/inactive). Created by the first-login trigger.
 - **members** — which auth user belongs to which owner. `role` allows only `'owner'` in Phase 1 (staff may return later).
 - **super_admins** — auth users who are our team (read access to everything).
