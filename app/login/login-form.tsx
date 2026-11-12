@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +17,8 @@ export function LoginForm() {
   const [error, setError] = useState("");
   const [secondsLeft, setSecondsLeft] = useState(0);
   const [pending, startTransition] = useTransition();
+  // A code works once: ignore a second verify (autofill can fire onComplete twice).
+  const verifying = useRef(false);
 
   useEffect(() => {
     if (secondsLeft <= 0) return;
@@ -36,9 +38,12 @@ export function LoginForm() {
   }
 
   function verify(value: string) {
+    if (verifying.current) return;
+    verifying.current = true;
     setError("");
     startTransition(async () => {
       const res = await verifyOtp(email, value);
+      verifying.current = false;
       // On success the action redirects; we only get here on failure.
       if (res && !res.ok) {
         setError(res.error);

@@ -16,7 +16,7 @@ Full spec: `docs/requirements.md`. Read ONLY the section named in the task, not 
 - Next.js is the front end AND the API (route handlers). Do NOT use Supabase Edge Functions.
 - Supabase: Postgres, Auth (email OTP; phone OTP later), Storage, Realtime, pg_cron
 - Payments: Razorpay ONLY, behind an adapter in `lib/payments`. Never show an owner's UPI ID or QR to players.
-- Hosting: Vercel + Supabase
+- Hosting: Cloudflare Workers (OpenNext adapter `@opennextjs/cloudflare`) + Supabase. `cacheComponents` is OFF in `next.config.ts` (it hangs `/login` on Workers); do not turn it on without testing `npm run preview`.
 
 ## Rules that must never break
 1. **No double booking.** Enforced in Postgres with an exclusion constraint (`btree_gist`, `tstzrange`) per court, for active booking statuses and blocks. App checks are extra, never the only check.
@@ -61,3 +61,5 @@ Full spec: `docs/requirements.md`. Read ONLY the section named in the task, not 
 - `npm run dev` start app
 - No Docker / `supabase start`: use the linked remote dev project (`supabase db push --remote`)
 - `npm run lint` / `npm run build`
+- `npm run preview` build + run locally in the Workers runtime; `npm run deploy` build + deploy; `npm run upload` new version without promoting
+- Test risky changes (auth, proxy, caching, env vars, new packages) with `npm run preview`, not only `npm run dev`. Deploy steps: `docs/DEPLOY.md`

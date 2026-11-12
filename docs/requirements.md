@@ -410,7 +410,7 @@ complete)
 Real-time calendar Supabase Realtime on bookings and blocks
 WhatsApp Provider the internal team used (or Meta Cloud
 API)
-Hosting Vercel (app) + Supabase (backend), India-nearest
+Hosting Cloudflare Workers via OpenNext (app) + Supabase (backend), India-nearest
 regions
 Code and tracking GitHub repo; docs/requirements.md  +
 CLAUDE.md  in the repo

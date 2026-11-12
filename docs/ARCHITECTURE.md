@@ -41,18 +41,21 @@ Supabase Realtime keeps the calendar in sync across devices. Planned.
 
 ## Integrations
 - Supabase — linked; schema applied to the dev project. Local stack: `supabase start -x gotrue,vector` (auth container does not start on this Mac).
-- Vercel — hosting. Planned (S1.6).
+- Cloudflare Workers (OpenNext) — hosting. Live at https://turf-app.sharath-dev.workers.dev (S1.6). See `docs/DEPLOY.md`.
 - Razorpay — Planned (S4.3), test mode first; money flow (our account vs the owner's) is decided before the pilot.
 - WhatsApp provider + AI model provider — Planned (S4.6–S4.8).
 - SMTP provider for login emails — Planned (production). SMS OTP provider — Planned (only for phone login later).
 
 ## Environment variables (names only)
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY` (server only)
-- Razorpay key id / secret / webhook secret (server only, Sprint 4)
+| Name | Type | Local | Cloudflare |
+| --- | --- | --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | public, inlined at build | `.env.local` | Workers Builds build variable (and your shell when running `npm run deploy`) |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public, inlined at build | `.env.local` | Workers Builds build variable |
+| `SUPABASE_SERVICE_ROLE_KEY` | secret, server only | `.dev.vars` | `wrangler secret put` |
+| Razorpay key id / key secret / webhook secret (Sprint 4) | secret, server only | `.dev.vars` | `wrangler secret put` |
+| WhatsApp token (Sprint 4) | secret, server only | `.dev.vars` | `wrangler secret put` |
 
-Stored in `.env.local` (git-ignored) and in Vercel settings.
+`.env.local` and `.dev.vars` are git-ignored. Never commit values.
 
 ## Deployment
-Planned: Vercel for the app, Supabase for the database; migrations applied with the Supabase CLI.
+Cloudflare Workers (OpenNext adapter) for the app, Supabase for the database; migrations applied with the Supabase CLI.

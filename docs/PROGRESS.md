@@ -6,6 +6,7 @@ Project state: status, decisions, issues. Task list and next task: [dev-plan.md]
 Phase 1A (owner app). Database schema (incl. slot lock and online-payment functions) live on the remote dev project (turf-app-dev); login and app shell built. Sprint 1: S1.1–S1.4 done. Change set 01 applied 2026-11-12.
 
 ## Done (newest first)
+- 2026-11-12 — S1.5 App shell: bottom nav (Calendar, More), turf-name header, manifest + icons; tested on a phone over an ngrok HTTPS tunnel: login, layout and Add to Home Screen work. Files: `app/(owner)/layout.tsx`, `components/shell/*`, `app/manifest.ts`, `public/icons/*`.
 - 2026-11-12 — Change set 01: migration `20261112000001_booking_lock_razorpay.sql` (no super admin, owner plans, Razorpay-only, `book_slot`, `confirm_online_payment`, `expire-holds` cron), tests `supabase/tests/booking_lock.sql` (13 checks pass on turf-app-dev), `lib/notify` stub, docs updated.
 - 2026-11-10 — S1.2 Prove overlap rule: 10 checks pass on turf-app-dev (overlap, booking vs block, block vs booking, reschedule into block rejected; back-to-back, other court, cancelled, rebook accepted). Files: `supabase/tests/overlap_rule.sql`.
 - 2026-11-10 — S1.1 Database schema: 12 tables, overlap rule, RLS, first-login trigger, audit trail, seed; pushed to turf-app-dev; types generated. Files: `supabase/migrations/*`, `supabase/seed.sql`, `lib/database.types.ts`.
@@ -15,9 +16,13 @@ Phase 1A (owner app). Database schema (incl. slot lock and online-payment functi
 - Supabase clients, `proxy.ts` route guard, and email OTP login (Gmail custom SMTP on dev). Verified: code email arrives, login works, owner + members rows created with email.
 
 ## In progress / blockers
-- None. Next: S1.5 app shell, then S1.6 Vercel deploy.
+- None. Next: S2.1 (first unticked task after S1.7, which is optional and can be done any time).
+
+## Done (S1.6 — 2026-11-12)
+- Deployed to Cloudflare Workers: https://turf-app.sharath-dev.workers.dev. Email OTP login and install-to-home-screen verified on an Android phone. Login form now ignores a second verify while one is running (code works once). Branch previews moved to S1.7.
 
 ## Decisions
+- 2026-11-12 — Hosting moved from Vercel to Cloudflare Workers via OpenNext. Reason: team already uses Cloudflare, commercial use allowed, low cost. `cacheComponents` and `partialPrefetching` turned off in `next.config.ts` because `/login` hung on Workers with them on (no code used them).
 - 2026-11-06 — Phase 1A is owner app only; WhatsApp calls are logged stubs in `lib/notify/`. Reason: bot needs Meta verification and is a later phase.
 - 2026-11-06 — `docs/dev-plan.md` is the task checklist and source of truth for what to build next. Reason: full sprint plan supplied by the team.
 
@@ -36,6 +41,7 @@ Phase 1A (owner app). Database schema (incl. slot lock and online-payment functi
 - 2026-11-12 — Slots lock for 5 minutes for online payment (BookMyShow-style); paid in time → confirmed automatically, else released. No owner confirmation, no booking-requests screen, no approval mode. Reason: removes owner work and stale holds.
 - 2026-11-12 — Razorpay only, behind `lib/payments`; players never get the owner's UPI ID/QR. Money flow (our account vs owner's) is decided before the pilot. Reason: automatic confirmation needs a gateway.
 - 2026-11-12 — Pricing logic unchanged; `book_slot` uses a placeholder price (court base price prorated). Reason: pricing is decided later.
+- 2026-11-12 — S1.5 ships Calendar + More tabs and a single turf name; Customers tab (S6.1) and turf switcher (Sprint 2) deferred. Reason: no Customers screen or multi-turf data yet.
 
 ## Known issues / tech debt
 - Do NOT run a full `supabase config push --remote`: local config.toml differs from the remote in ~15 unrelated settings (email, MFA, pooler, storage). Change phone auth in the dashboard, or push a minimal config after checking `supabase config diff --remote`.

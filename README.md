@@ -15,7 +15,7 @@ Planned:
 - WhatsApp AI agent behind an MCP server (`check_availability`, `book_slot`) and messages
 
 ## Tech stack
-Next.js (App Router, also the API via route handlers), TypeScript, Tailwind CSS, shadcn/ui, Supabase (Postgres, Auth, Storage, Realtime, pg_cron), Razorpay, Vercel. No Supabase Edge Functions.
+Next.js (App Router, also the API via route handlers), TypeScript, Tailwind CSS, shadcn/ui, Supabase (Postgres, Auth, Storage, Realtime, pg_cron), Razorpay, Cloudflare Workers (OpenNext). No Supabase Edge Functions.
 
 ## Run locally
 1. `npm install`

@@ -14,13 +14,13 @@ One feature per Claude Code session: plan, build, test on a phone, commit, clear
 2. Paste the prompt from this plan; it names the section of `docs/requirements.md` to read.
 3. Review the plan; ask questions; approve.
 4. Claude builds; it runs `npm run lint` and `npm run build` before saying done.
-5. Test on your phone (Vercel preview URL) against the "Done when" line in the requirements.
+5. Test on your phone (Cloudflare preview URL, or `npm run preview` locally) against the "Done when" line in the requirements.
 6. `git add . && git commit -m "<feature>" && git push`.
 
 **Git branches**
 
-- `main` = always working; Vercel deploys it.
-- One branch per feature (e.g., `feature/calendar`); merge to `main` when it passes the phone test. Vercel gives each branch its own preview link.
+- `main` = always working; Cloudflare Workers Builds deploys it.
+- One branch per feature (e.g., `feature/calendar`); merge to `main` when it passes the phone test. Cloudflare gives each branch its own preview URL.
 
 **Database changes**
 
@@ -43,8 +43,9 @@ Goal: an owner can log in on a phone and land on an empty home screen, backed by
 - [x] **S1.2 Prove the overlap rule** — in the SQL Editor, an overlapping booking and a booking over a block must both fail. (2026-11-10)
 - [x] **S1.3 Supabase client setup** — browser + server clients, middleware (Next 16: `proxy.ts`) that refreshes the session and protects owner pages. (2026-11-10)
 - [x] **S1.4 Login (screen 1)** — email OTP (phone OTP later); first login creates owner + member rows. (2026-11-10)
-- [ ] **S1.5 App shell** — bottom nav (Calendar, Customers, More), header with turf switcher, PWA manifest + icons, "Add to Home Screen" works.
-- [ ] **S1.6 Deploy** — connect the repo to Vercel, add env variables, preview links per branch.
+- [x] **S1.5 App shell** — bottom nav (Calendar, More; Customers tab arrives with S6.1), header with the turf name (turf switcher arrives in Sprint 2), PWA manifest + icons, "Add to Home Screen" works. (2026-11-12)
+- [x] **S1.6 Deploy** — host on Cloudflare Workers (OpenNext adapter), build variables and secrets. Live at https://turf-app.sharath-dev.workers.dev; email OTP login and Add to Home Screen verified on an Android phone. Steps in `docs/DEPLOY.md`. (2026-11-12)
+- [ ] **S1.7 Branch preview URLs** — connect the GitHub repo in Cloudflare Workers Builds (production branch `main`, non-main branches build previews). Done when: pushing a test branch gives its own preview link and `main` deploys by itself. Steps in `docs/DEPLOY.md`. Moved out of S1.6, to do later.
 
 **Prompts**
 
@@ -203,7 +204,7 @@ Goal: everything a pilot owner needs, on a production setup in the company accou
 
 - [ ] **S6.1 Customers (screen 7)** — list, search, history, no-show count.
 - [ ] **S6.2 Reports (screen 9)** — today / week / month; totals checked against the bookings.
-- [ ] **S6.3 Production setup** — company Supabase project on Pro (Mumbai), `supabase db push`, secrets, custom SMTP for login emails, live WhatsApp number, Vercel env variables, custom domain.
+- [ ] **S6.3 Production setup** — company Supabase project on Pro (Mumbai), `supabase db push`, secrets, custom SMTP for login emails, live WhatsApp number, Cloudflare secrets and build variables, custom domain.
 - [ ] **S6.4 Full test day** — run a fake turf for a day with 2 phones: owner and player. Check every "Done when" in the requirements.
 - [ ] **S6.5 Owner guide** — one-page "how to use" with screenshots, plus the setup checklist our team follows when onboarding a turf.
 
@@ -228,7 +229,7 @@ Five outside dependencies can stall the build. Start all of them now; none of th
 | WhatsApp test number + API access | Sprint 4 Part B | WhatsApp team | Ask now; share the WhatsApp AI agent section of the requirements doc |
 | Meta business verification + templates approved | Sprint 5 | WhatsApp team + admin | Submit company documents and the 6 templates |
 | SMTP provider for login emails (Supabase's built-in email is rate-limited and its templates are locked) | Sprint 1 (dev: Gmail app password, set up 2026-11-10); production provider in Sprint 6 | Admin | Pick an SMTP provider; later also an SMS provider + DLT registration (India) if phone OTP is wanted |
-| Company Supabase (Pro) + Vercel accounts | Sprint 6 (production) | Admin | Create under the DreamTusk accounts; add you as member |
+| Company Supabase (Pro) + Cloudflare (Workers Paid, $5/month, if the worker exceeds 3 MiB) accounts | Sprint 6 (production) | Admin | Create under the DreamTusk accounts; add you as member |
 | App name + domain + privacy policy page | Sprint 5 | Team | Needed for Meta verification and the PWA |
 
 **Pilot plan**
@@ -247,6 +248,8 @@ Five outside dependencies can stall the build. Start all of them now; none of th
 | --- | --- | --- |
 | 2026-11-06 | Plan imported from Downloads as docs/dev-plan.md; pilot checklist items given ids PL.1–PL.5 | Every task needs an id |
 | 2026-11-06 | Removed staff role from Phase 1 (S6.1 Staff task removed, S6.x renumbered; S1.1 prompt, S3 and S6 "Done when"/prompts, PL.2 reworded) | Keep Phase 1 simple |
+| 2026-11-12 | S1.6 ticked; "preview URLs per branch" split into new task S1.7 | Owner chose to do Workers Builds later |
+| 2026-11-12 | S1.6 changed from Vercel to Cloudflare Workers (OpenNext); How we work, S6.3 and blockers table updated; `cacheComponents`/`partialPrefetching` turned off | Team uses Cloudflare; `/login` hung on Workers with cacheComponents on |
 | 2026-11-10 | S1.1 built: overlap rule uses a `court_occupancy` table (bookings and blocks are separate tables, one constraint cannot span both); `message_log`, `wa_sessions`, `calendar_feeds` left for later tasks | Postgres exclusion constraints work on one table only |
 | 2026-11-10 | S1.4 login changed from phone OTP to email OTP; S6.4 and blocker table now need custom SMTP instead of an SMS provider; owners and members get an `email` column | Twilio/SMS provider not available yet; phone OTP stays a later option |
 | 2026-11-10 | Custom SMTP needed for S1.4 testing, not only production (Supabase locks email templates and the code without it); dev project now uses Gmail SMTP | Default templates have no `{{ .Token }}` |
@@ -254,3 +257,5 @@ Five outside dependencies can stall the build. Start all of them now; none of th
 | 2026-11-12 | S2.1 and S2.4: removed UPI ID / QR upload; S2.4 also removed approval mode | Players pay only through Razorpay; no approval mode |
 | 2026-11-12 | Sprint 4 replaced with S4.1–S4.9 (booking service, hold expiry, Razorpay payments, public booking link, MCP server, AI agent, WhatsApp webhook, message sending, per-turf links); booking requests screen and bot engine removed; `wa_sessions` replaced by `conversations`, `messages`, `agent_settings` | 5-minute BookMyShow-style lock with automatic confirmation; WhatsApp becomes an AI agent behind an MCP server |
 | 2026-11-12 | S1.5 nav no longer has a Requests tab; S5.2 no longer has a new-request alert | Booking requests screen removed |
+| 2026-11-12 | S1.5 scope: Customers tab deferred to S6.1 and turf switcher to Sprint 2; shell, manifest and icons verified on a production build; task stays unticked until Add to Home Screen is confirmed on a phone | Nothing to show on a Customers screen yet; one turf per owner until Sprint 2 |
+| 2026-11-12 | S1.5 ticked after a phone test over an HTTPS tunnel: login, layout and Add to Home Screen work | Done when met |
