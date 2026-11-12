@@ -124,6 +124,7 @@ export type Database = {
           id: string
           notes: string | null
           owner_id: string
+          payment_order_id: string | null
           payment_proof_url: string | null
           price: number
           price_overridden: boolean
@@ -142,6 +143,7 @@ export type Database = {
           id?: string
           notes?: string | null
           owner_id: string
+          payment_order_id?: string | null
           payment_proof_url?: string | null
           price?: number
           price_overridden?: boolean
@@ -160,6 +162,7 @@ export type Database = {
           id?: string
           notes?: string | null
           owner_id?: string
+          payment_order_id?: string | null
           payment_proof_url?: string | null
           price?: number
           price_overridden?: boolean
@@ -358,6 +361,9 @@ export type Database = {
           id: string
           name: string
           phone: string
+          plan: string
+          plan_renews_at: string | null
+          plan_started_at: string | null
           status: Database["public"]["Enums"]["owner_status"]
         }
         Insert: {
@@ -366,6 +372,9 @@ export type Database = {
           id?: string
           name?: string
           phone?: string
+          plan?: string
+          plan_renews_at?: string | null
+          plan_started_at?: string | null
           status?: Database["public"]["Enums"]["owner_status"]
         }
         Update: {
@@ -374,6 +383,9 @@ export type Database = {
           id?: string
           name?: string
           phone?: string
+          plan?: string
+          plan_renews_at?: string | null
+          plan_started_at?: string | null
           status?: Database["public"]["Enums"]["owner_status"]
         }
         Relationships: []
@@ -382,6 +394,8 @@ export type Database = {
         Row: {
           amount: number
           booking_id: string
+          gateway: string | null
+          gateway_payment_id: string | null
           id: string
           mode: Database["public"]["Enums"]["payment_mode"]
           owner_id: string
@@ -392,6 +406,8 @@ export type Database = {
         Insert: {
           amount: number
           booking_id: string
+          gateway?: string | null
+          gateway_payment_id?: string | null
           id?: string
           mode: Database["public"]["Enums"]["payment_mode"]
           owner_id: string
@@ -402,6 +418,8 @@ export type Database = {
         Update: {
           amount?: number
           booking_id?: string
+          gateway?: string | null
+          gateway_payment_id?: string | null
           id?: string
           mode?: Database["public"]["Enums"]["payment_mode"]
           owner_id?: string
@@ -463,24 +481,11 @@ export type Database = {
           },
         ]
       }
-      super_admins: {
-        Row: {
-          user_id: string
-        }
-        Insert: {
-          user_id: string
-        }
-        Update: {
-          user_id?: string
-        }
-        Relationships: []
-      }
       turfs: {
         Row: {
           address: string | null
           advance_type: string
           advance_value: number
-          approval_mode: boolean
           booking_code: string | null
           cancellation_policy: string | null
           created_at: string
@@ -491,14 +496,11 @@ export type Database = {
           owner_id: string
           reminder_hours: number
           summary_time: string
-          upi_id: string | null
-          upi_qr_url: string | null
         }
         Insert: {
           address?: string | null
           advance_type?: string
           advance_value?: number
-          approval_mode?: boolean
           booking_code?: string | null
           cancellation_policy?: string | null
           created_at?: string
@@ -509,14 +511,11 @@ export type Database = {
           owner_id: string
           reminder_hours?: number
           summary_time?: string
-          upi_id?: string | null
-          upi_qr_url?: string | null
         }
         Update: {
           address?: string | null
           advance_type?: string
           advance_value?: number
-          approval_mode?: boolean
           booking_code?: string | null
           cancellation_policy?: string | null
           created_at?: string
@@ -527,8 +526,6 @@ export type Database = {
           owner_id?: string
           reminder_hours?: number
           summary_time?: string
-          upi_id?: string | null
-          upi_qr_url?: string | null
         }
         Relationships: [
           {
@@ -559,7 +556,7 @@ export type Database = {
         | "expired"
         | "no_show"
       owner_status: "active" | "inactive"
-      payment_mode: "cash" | "upi"
+      payment_mode: "cash" | "upi" | "online"
       payment_type: "advance" | "balance" | "refund"
     }
     CompositeTypes: {
@@ -703,7 +700,7 @@ export const Constants = {
         "no_show",
       ],
       owner_status: ["active", "inactive"],
-      payment_mode: ["cash", "upi"],
+      payment_mode: ["cash", "upi", "online"],
       payment_type: ["advance", "balance", "refund"],
     },
   },

@@ -1,14 +1,13 @@
 # Database schema: tables and relations
 
 Source of truth is `supabase/migrations/`. This page is a readable map of it. Rules, RLS and the overlap constraint are explained in `DATABASE.md`.
-`*` = required column. `owner_id` is on every table except `owners`, `super_admins`.
+`*` = required column. `owner_id` is on every table except `owners`.
 
 ## Relationship map
 
 ```mermaid
 erDiagram
     AUTH_USERS ||--o{ MEMBERS : "logs in as"
-    AUTH_USERS ||--o| SUPER_ADMINS : "may be"
     OWNERS ||--o{ MEMBERS : has
     OWNERS ||--o{ TURFS : owns
     OWNERS ||--o{ CUSTOMERS : has
@@ -29,16 +28,15 @@ In words: **owner → turfs → courts → (price bands, bookings, blocks)**. A 
 
 | Table | What it is | Key columns | Belongs to |
 |---|---|---|---|
-| **owners** | One business account | name*, phone*, email, status* (active/inactive) | none (top level) |
+| **owners** | One business account (tenant) | name*, phone*, email, status* (active/inactive), plan* (free/starter/pro), plan_started_at, plan_renews_at | none (top level) |
 | **members** | Links a login user to an owner | user_id*, role* (`owner` only), phone, email | owners, auth.users |
-| **super_admins** | Our own team (read-only access to all) | user_id* | auth.users |
-| **turfs** | A turf location and its booking rules | name*, booking_code (unique), address, maps_link, upi_id, upi_qr_url, hold_minutes*, approval_mode*, advance_type/value*, cancellation_policy, reminder_hours*, summary_time* | owners |
+| **turfs** | A turf location and its booking rules | name*, booking_code (unique), address, maps_link, hold_minutes* (default 5), advance_type/value*, cancellation_policy, reminder_hours*, summary_time* | owners |
 | **courts** | A bookable court in a turf | name* (unique per turf), sport, slot_minutes*, open_time*, close_time*, base_price*, active* | turfs |
 | **price_bands** | Peak / off-peak price of a court | days_of_week*, start_time*, end_time*, price*, tag, whatsapp_bookable* | courts |
 | **customers** | A player the owner has booked | name*, phone* (unique per owner), notes | owners |
-| **bookings** | One reservation of a court | court_id*, customer_id, time_range*, status*, source*, price*, price_overridden*, notes, created_by, cancel_reason, hold_expires_at, payment_proof_url | courts, customers |
+| **bookings** | One reservation of a court | court_id*, customer_id, time_range*, status*, source*, price*, price_overridden*, notes, created_by, cancel_reason, hold_expires_at, payment_order_id (unique), payment_proof_url | courts, customers |
 | **blocks** | Time a court is unavailable | court_id*, time_range*, reason, created_by | courts |
-| **payments** | Money recorded on a booking | booking_id*, amount*, mode* (cash/UPI), type* (advance/balance/refund), recorded_by, paid_at* | bookings |
+| **payments** | Money recorded on a booking | booking_id*, amount*, mode* (online/cash/UPI), type* (advance/balance/refund), gateway, gateway_payment_id (unique), recorded_by, paid_at* | bookings |
 | **court_occupancy** | System table behind the no-overlap rule (app never writes it) | court_id*, time_range*, booking_id or block_id | courts, bookings, blocks |
 | **audit_log** | Who changed what, filled by triggers | table_name*, row_id*, action*, changed_by, old_data, new_data | owners |
 
@@ -48,7 +46,6 @@ In words: **owner → turfs → courts → (price bands, bookings, blocks)**. A 
 |---|---|---|
 | members.owner_id | owners.id | cascade |
 | members.user_id | auth.users.id | cascade |
-| super_admins.user_id | auth.users.id | cascade |
 | turfs.owner_id | owners.id | cascade |
 | customers.owner_id | owners.id | cascade |
 | courts (turf_id, owner_id) | turfs (id, owner_id) | cascade |

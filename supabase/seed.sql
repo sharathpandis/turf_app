@@ -14,10 +14,10 @@ insert into auth.users (
 update public.owners set name = 'Green Arena Sports'
 where id = (select owner_id from public.members where user_id = '11111111-1111-1111-1111-111111111111');
 
-insert into public.turfs (id, owner_id, name, booking_code, address, upi_id, advance_type, advance_value,
+insert into public.turfs (id, owner_id, name, booking_code, address, hold_minutes, advance_type, advance_value,
                           cancellation_policy)
 select '22222222-2222-2222-2222-222222222201', owner_id, 'Green Arena', 'GREENARENA',
-       'Anna Nagar, Chennai', 'greenarena@upi', 'fixed', 300,
+       'Anna Nagar, Chennai', 5, 'fixed', 300,
        'Full advance refund if cancelled 6+ hours before.'
 from public.members where user_id = '11111111-1111-1111-1111-111111111111';
 
@@ -83,3 +83,7 @@ insert into public.blocks (owner_id, court_id, time_range, reason, created_by)
 select owner_id, '33333333-3333-3333-3333-333333333302', tstzrange(pg_temp.ist(1, '20:00'), pg_temp.ist(1, '21:00')),
        'Playo booking', '11111111-1111-1111-1111-111111111111'
 from public.turfs where id = '22222222-2222-2222-2222-222222222201';
+
+-- the pending_payment booking holds its slot for 5 minutes from now
+update public.bookings set hold_expires_at = now() + interval '5 minutes'
+where id = '55555555-5555-5555-5555-555555555503';
