@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Payment – 5 minute hold</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E6B43}a:hover{color:#09502F}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F4; font-family: Inter, sans-serif; color: #13201A; display: flex; flex-direction: column">
+<div style="padding: 52px 20px 0; display: flex; flex-direction: column; gap: 16px; flex: 1">
+<div style="background: #FFF1D6; border: 1.5px solid #E9A23B; border-radius: 16px; padding: 18px; display: flex; align-items: center; gap: 14px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7A4A00" stroke-width="2" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><polyline points="12 9 12 13 15 15"></polyline><line x1="9" y1="2" x2="15" y2="2"></line></svg>
+<div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+<div style="font-size: 14px; font-weight: 600; color: #7A4A00">Your slot is held for</div>
+<div style="font-size: 13px; color: #7A4A00">Pay before the timer ends</div>
+</div>
+<div style="font: 700 32px 'Space Grotesk', sans-serif; color: #7A4A00">4:32</div>
+</div>
+<div style="height: 6px; border-radius: 3px; background: #E2E6E1; overflow: hidden"><div style="width: 90%; height: 6px; background: #E9A23B"></div></div>
+<div style="background: #FFFFFF; border: 1px solid #E2E6E1; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 13px; font-weight: 600; color: #5B6B63; letter-spacing: 0.06em; text-transform: uppercase">Your booking</div>
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">Green Arena · Turf 1</div>
+<div style="font-size: 15px; color: #13201A">Tue 17 Nov · 10–11 PM · Football</div>
+<div style="font-size: 14px; color: #5B6B63">Karthik · 99401 22334</div>
+<div style="height: 1px; background: #E2E6E1"></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #5B6B63">Slot price</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600">₹1,500</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #5B6B63">Pay at turf</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600">₹1,200</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-size: 16px; font-weight: 600">Pay now (advance)</span><span style="font: 700 26px 'Space Grotesk', sans-serif; color: #0E6B43">₹300</span></div>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5B6B63; line-height: 1.6">If payment isn't completed in 5 minutes, the slot is released and you'll need to pick it again. Cancellation: full advance refund if cancelled 6+ hours before.</p>
+<div style="flex: 1"></div>
+</div>
+<div style="background: #FFFFFF; border-top: 1px solid #E2E6E1; padding: 16px 20px 28px; display: flex; flex-direction: column; gap: 10px">
+<button style="height: 52px; border: 0; border-radius: 12px; background: #0E6B43; color: #FFFFFF; font: 600 16px Inter, sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Pay ₹300 securely</button>
+<div style="font-size: 12px; color: #5B6B63; text-align: center">UPI, cards and netbanking · secured by Razorpay</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

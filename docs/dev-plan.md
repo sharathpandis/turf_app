@@ -27,6 +27,10 @@ One feature per Claude Code session: plan, build, test on a phone, commit, clear
 - Only through migration files + `supabase db push`; regenerate types after each one.
 - Supabase MCP: read schema, logs and security advisors only.
 
+**Each UI task**
+
+- Read `docs/design/README.md` and the task's mockup; test at phone width and at desktop width.
+
 **End of each sprint**
 
 - Demo on a phone to the team (15 min).
@@ -46,6 +50,7 @@ Goal: an owner can log in on a phone and land on an empty home screen, backed by
 - [x] **S1.5 App shell** — bottom nav (Calendar, More; Customers tab arrives with S6.1), header with the turf name (turf switcher arrives in Sprint 2), PWA manifest + icons, "Add to Home Screen" works. (2026-11-12)
 - [x] **S1.6 Deploy** — host on Cloudflare Workers (OpenNext adapter), build variables and secrets. Live at https://turf-app.sharath-dev.workers.dev; email OTP login and Add to Home Screen verified on an Android phone. Steps in `docs/DEPLOY.md`. (2026-11-12)
 - [ ] **S1.7 Branch preview URLs** — connect the GitHub repo in Cloudflare Workers Builds (production branch `main`, non-main branches build previews). Done when: pushing a test branch gives its own preview link and `main` deploys by itself. Steps in `docs/DEPLOY.md`. Moved out of S1.6, to do later.
+- [ ] **S1.8 Design system + responsive shell** — design tokens (colours, fonts, radius) in the Tailwind theme / shadcn variables; app shell: bottom nav below `lg`, left sidebar at `lg`+ (Calendar, Courts & prices, Turf settings; Customers appears with S6.1); turf switcher; restyle `/login` to mockup 01 (6-digit code). Done when: phone and desktop both match the mockups.
 
 **Prompts**
 
@@ -76,10 +81,10 @@ Goal: a new owner sets up a real turf in under 10 minutes, and the app knows eve
 
 **Tasks**
 
-- [ ] **S2.1 Setup wizard (screen 2)** — turf details → courts → hours → slot length → base price.
-- [ ] **S2.2 Courts and pricing settings (screen 8)** — edit courts and hours, peak/off-peak bands, slot tags, "bookable on WhatsApp" per band, close a court for dates.
+- [ ] **S2.1 Setup wizard (screen 2)** — follow mockup 02; 4 steps: turf details → courts → prices → booking settings (advance, hold minutes, cancellation policy, booking code). No UPI step.
+- [ ] **S2.2 Courts and pricing settings (screen 8)** — follow mockup 09 (desktop) and the same content single-column on phone; label the `whatsapp_bookable` switch "Bookable online" (WhatsApp + booking link). Edit courts and hours, peak/off-peak bands, slot tags, "bookable on WhatsApp" per band, close a court for dates.
 - [ ] **S2.3 Slot engine** — one shared function: given a court and a date, return every slot with price, tag and status (free, pending, booked, blocked). Handles courts open past midnight. Unit tests for pricing bands and midnight.
-- [ ] **S2.4 Turf settings (part of screen 10)** — advance rule, hold minutes, cancellation policy text, booking code.
+- [ ] **S2.4 Turf settings (part of screen 10)** — same fields as setup step 4: advance rule, hold minutes, cancellation policy text, booking code.
 
 **Prompts**
 
@@ -106,13 +111,13 @@ Goal: the owner runs a full day of bookings from the phone. This is the heart of
 
 **Part A — calendar and booking**
 
-- [ ] **S3.1 Calendar (screen 3)** — day view per court using the slot engine, colours by status and source, swipe between days, "Today" button, week view.
+- [ ] **S3.1 Calendar (screen 3)** — day view per court using the slot engine, colours by status and source, swipe between days, "Today" button. Mockup 03 on phone (one court, court chips, date strip); mockup 08 on desktop (all courts side by side). Held slots show a countdown from `hold_expires_at`. No week view.
 - [ ] **S3.2 Live updates** — Supabase Realtime on bookings; a booking added on one phone shows on another within 3 seconds.
-- [ ] **S3.3 Add / edit booking (screen 4)** — bottom sheet from a free slot; customer auto-fill by phone; price from the slot engine; advance + mode; friendly error when the slot was just taken.
+- [ ] **S3.3 Add / edit booking (screen 4)** — bottom sheet on phone (mockup 04), right side panel on desktop, from a free slot; customer auto-fill by phone; price from the slot engine; advance + mode; friendly error when the slot was just taken.
 
 **Part B — detail, blocks, payments**
 
-- [ ] **S3.4 Booking detail (screen 5)** — record balance, check-in, no-show, reschedule, cancel with reason, call / open WhatsApp chat.
+- [ ] **S3.4 Booking detail (screen 5)** — full screen on phone (mockup 05), right side panel on desktop (mockup 08); record balance, check-in, no-show, reschedule, cancel with reason, call / open WhatsApp chat.
 - [ ] **S3.5 Block slots (screen 6)** — single or multiple slots, reason incl. "Playo / Hudle / other app".
 - [ ] **S3.6 Payments** — payments table drives Unpaid / Advance paid / Fully paid; refunds recorded.
 - [ ] **S3.7 Audit trail** — who changed what and when, shown in booking detail.
@@ -144,8 +149,8 @@ Goal: a player books and pays for a slot through a public booking link or the Wh
 
 - [ ] **S4.1 Booking service** — availability function + `book_slot` wrapper in `lib/booking` (server only; wraps `private.book_slot` through a service-role-only wrapper or direct connection).
 - [ ] **S4.2 Hold expiry** — pg_cron job (created in migration 20261112000001) + `book_slot` clean-up; verify on the remote that lapsed holds expire.
-- [ ] **S4.3 Payments** — `lib/payments` Razorpay adapter (test mode), `/pay/[booking_id]` page with 5-minute countdown, webhook route with signature check, `confirm_online_payment`, automatic refund on `refund_needed`.
-- [ ] **S4.4 Public booking link** — `/b/[booking_code]`: free slots and prices, player enters name + phone, `book_slot`, then the payment page.
+- [ ] **S4.3 Payments** — `lib/payments` Razorpay adapter (test mode), `/pay/[booking_id]` page with 5-minute countdown (mockup 07), webhook route with signature check, `confirm_online_payment`, automatic refund on `refund_needed`.
+- [ ] **S4.4 Public booking link** — `/b/[booking_code]`: free slots and prices, follow mockup 06; player enters name + phone before "Hold slot and pay"; `book_slot` with source `booking_link`, then the payment page.
 
 **Part B — AI agent on WhatsApp (needs the test number and a model provider)**
 
@@ -259,3 +264,6 @@ Five outside dependencies can stall the build. Start all of them now; none of th
 | 2026-11-12 | S1.5 nav no longer has a Requests tab; S5.2 no longer has a new-request alert | Booking requests screen removed |
 | 2026-11-12 | S1.5 scope: Customers tab deferred to S6.1 and turf switcher to Sprint 2; shell, manifest and icons verified on a production build; task stays unticked until Add to Home Screen is confirmed on a phone | Nothing to show on a Customers screen yet; one turf per owner until Sprint 2 |
 | 2026-11-12 | S1.5 ticked after a phone test over an HTTPS tunnel: login, layout and Add to Home Screen work | Done when met |
+| 2026-11-12 | Added S1.8 Design system + responsive shell (tokens, bottom nav / sidebar at `lg`, turf switcher, restyled `/login`) | Designs approved; desktop layout is in Phase 1 |
+| 2026-11-12 | S2.1, S2.2, S2.4, S3.1, S3.3, S3.4, S4.3, S4.4 now follow the mockups in `docs/design/`; S2.1 is 4 steps (details, courts, prices, booking settings); S3.1 week view removed; "How we work" gets a UI-task line | Mockups define phone and desktop layouts |
+| 2026-11-12 | Migration 20261112000002 adds `booking_link` to `booking_source` (used by S4.4) | Booking-link bookings needed their own source |

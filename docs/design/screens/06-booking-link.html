@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Booking link – player</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E6B43}a:hover{color:#09502F}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F4; font-family: Inter, sans-serif; color: #13201A; display: flex; flex-direction: column">
+<div style="background: #0E6B43; color: #FFFFFF; padding: 52px 20px 20px; display: flex; flex-direction: column; gap: 6px">
+<div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #D6EDE0">Book a slot</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700">Green Arena</h1>
+<a href="#" style="font-size: 14px; color: #FFFFFF; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Velachery, Chennai · Directions</a>
+</div>
+<div style="padding: 16px 20px 0; display: flex; flex-direction: column; gap: 14px; flex: 1">
+<div style="display: flex; gap: 8px">
+<button style="height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: #13201A; color: #FFFFFF; font: 600 13px Inter, sans-serif">Football · Turf 1</button>
+<button style="height: 40px; padding: 0 14px; border: 1.5px solid #E2E6E1; border-radius: 999px; background: #FFFFFF; color: #13201A; font: 600 13px Inter, sans-serif">Pickleball</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">
+<button style="height: 56px; border: 0; border-radius: 12px; background: #0E6B43; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 11px; color: #D6EDE0">Today</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #FFFFFF">17</span></button>
+<button style="height: 56px; border: 1.5px solid #E2E6E1; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 11px; color: #5B6B63">Wed</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">18</span></button>
+<button style="height: 56px; border: 1.5px solid #E2E6E1; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 11px; color: #5B6B63">Thu</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">19</span></button>
+<button style="height: 56px; border: 1.5px solid #E2E6E1; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 11px; color: #5B6B63">Fri</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">20</span></button>
+<button style="height: 56px; border: 1.5px solid #E2E6E1; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 11px; color: #5B6B63">Sat</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">21</span></button>
+</div>
+<div style="font-size: 13px; font-weight: 600; color: #5B6B63">Evening</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<button style="height: 64px; border: 1.5px solid #0E6B43; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #13201A">5 PM</span><span style="font-size: 12px; color: #5B6B63">₹1,000</span></button>
+<button disabled style="height: 64px; border: 0; border-radius: 12px; background: #ECEEEC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #5B6B63; text-decoration: line-through">6 PM</span><span style="font-size: 12px; color: #5B6B63">Booked</span></button>
+<button disabled style="height: 64px; border: 0; border-radius: 12px; background: #ECEEEC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #5B6B63; text-decoration: line-through">7 PM</span><span style="font-size: 12px; color: #5B6B63">Booked</span></button>
+<button disabled style="height: 64px; border: 0; border-radius: 12px; background: #ECEEEC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #5B6B63; text-decoration: line-through">8 PM</span><span style="font-size: 12px; color: #5B6B63">Booked</span></button>
+<button disabled style="height: 64px; border: 0; border-radius: 12px; background: #ECEEEC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #5B6B63; text-decoration: line-through">9 PM</span><span style="font-size: 12px; color: #5B6B63">Booked</span></button>
+<button style="height: 64px; border: 0; border-radius: 12px; background: #0E6B43; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #FFFFFF">10 PM</span><span style="font-size: 12px; color: #D6EDE0">₹1,500</span></button>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5B6B63; line-height: 1.5">Taken slots are greyed out. Prices are per 60-minute slot.</p>
+<div style="flex: 1"></div>
+</div>
+<div style="background: #FFFFFF; border-top: 1px solid #E2E6E1; padding: 16px 20px 28px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">Tue 17 Nov · 10–11 PM</span><span style="font-size: 13px; color: #5B6B63">Pay ₹300 advance now · ₹1,200 at turf</span></div>
+<span style="font: 700 20px 'Space Grotesk', sans-serif">₹1,500</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #5B6B63">Your name<input value="Karthik" style="height: 44px; border: 1.5px solid #E2E6E1; border-radius: 10px; padding: 0 12px; font: 500 15px Inter, sans-serif; color: #13201A; background: #FFFFFF; min-width: 0"></label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #5B6B63">Phone<input value="99401 22334" style="height: 44px; border: 1.5px solid #E2E6E1; border-radius: 10px; padding: 0 12px; font: 500 15px Inter, sans-serif; color: #13201A; background: #FFFFFF; min-width: 0"></label>
+</div>
+<button style="height: 52px; border: 0; border-radius: 12px; background: #0E6B43; color: #FFFFFF; font: 600 16px Inter, sans-serif">Hold slot and pay</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

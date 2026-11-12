@@ -22,6 +22,7 @@ Phase 1A (owner app). Database schema (incl. slot lock and online-payment functi
 - Deployed to Cloudflare Workers: https://turf-app.sharath-dev.workers.dev. Email OTP login and install-to-home-screen verified on an Android phone. Login form now ignores a second verify while one is running (code works once). Branch previews moved to S1.7.
 
 ## Decisions
+- 2026-11-12 — UI designs approved (`docs/design/`); desktop layout (sidebar at `lg`) is part of Phase 1. Added `booking_link` to `booking_source` for booking-link bookings.
 - 2026-11-12 — Hosting moved from Vercel to Cloudflare Workers via OpenNext. Reason: team already uses Cloudflare, commercial use allowed, low cost. `cacheComponents` and `partialPrefetching` turned off in `next.config.ts` because `/login` hung on Workers with them on (no code used them).
 - 2026-11-06 — Phase 1A is owner app only; WhatsApp calls are logged stubs in `lib/notify/`. Reason: bot needs Meta verification and is a later phase.
 - 2026-11-06 — `docs/dev-plan.md` is the task checklist and source of truth for what to build next. Reason: full sprint plan supplied by the team.
@@ -53,5 +54,5 @@ Phase 1A (owner app). Database schema (incl. slot lock and online-payment functi
 - Leftover MySQL install in /usr/local/mysql-8.0.26-macos11-arm64 needs sudo to delete (unused).
 - No `.env.example`.
 - `private.*` functions are not reachable through the Supabase API; S4.1 needs a service-role-only wrapper or direct DB connection.
-- `booking_source` has no 'web' value for booking-link bookings yet; `bookings.payment_proof_url` and enum value `rejected` are now unused.
+- `bookings.payment_proof_url` and enum value `rejected` are now unused.
 - The 'two simultaneous bookings' SQL test is sequential (one session); the exclusion constraint is the actual guarantee.

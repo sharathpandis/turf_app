@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Login with code</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E6B43}a:hover{color:#09502F}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F4; font-family: Inter, sans-serif; color: #13201A; display: flex; flex-direction: column; padding: 72px 24px 32px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 12px; background: #0E6B43; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><line x1="12" y1="5" x2="12" y2="19"></line><circle cx="12" cy="12" r="3"></circle></svg></div>
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700">Turf App</div>
+</div>
+<div style="margin-top: 56px; display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700">Enter your code</h1>
+<p style="margin: 0; font-size: 16px; color: #5B6B63; line-height: 1.5">We sent a 6-digit code to <strong style="color: #13201A">owner@greenarena.in</strong></p>
+<a href="#" style="font-size: 14px; font-weight: 600; text-decoration: none">Change email</a>
+</div>
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px">
+<input aria-label="Digit 1" value="4" style="height: 56px; border: 1.5px solid #0E6B43; border-radius: 12px; text-align: center; font: 600 22px 'Space Grotesk', sans-serif; color: #13201A; background: #FFFFFF; min-width: 0">
+<input aria-label="Digit 2" value="8" style="height: 56px; border: 1.5px solid #0E6B43; border-radius: 12px; text-align: center; font: 600 22px 'Space Grotesk', sans-serif; color: #13201A; background: #FFFFFF; min-width: 0">
+<input aria-label="Digit 3" value="2" style="height: 56px; border: 1.5px solid #0E6B43; border-radius: 12px; text-align: center; font: 600 22px 'Space Grotesk', sans-serif; color: #13201A; background: #FFFFFF; min-width: 0">
+<input aria-label="Digit 4" value="" style="height: 56px; border: 2px solid #0E6B43; border-radius: 12px; text-align: center; font: 600 22px 'Space Grotesk', sans-serif; color: #13201A; background: #E3F1E9; min-width: 0">
+<input aria-label="Digit 5" value="" style="height: 56px; border: 1.5px solid #E2E6E1; border-radius: 12px; text-align: center; font: 600 22px 'Space Grotesk', sans-serif; color: #13201A; background: #FFFFFF; min-width: 0">
+<input aria-label="Digit 6" value="" style="height: 56px; border: 1.5px solid #E2E6E1; border-radius: 12px; text-align: center; font: 600 22px 'Space Grotesk', sans-serif; color: #13201A; background: #FFFFFF; min-width: 0">
+</div>
+<div style="margin-top: 16px; display: flex; justify-content: space-between; font-size: 14px; color: #5B6B63">
+<span>Code valid for 10 minutes</span>
+<span>Resend in <strong style="color: #13201A">0:42</strong></span>
+</div>
+<div style="flex: 1"></div>
+<button style="height: 52px; border: 0; border-radius: 12px; background: #0E6B43; color: #FFFFFF; font: 600 16px Inter, sans-serif">Verify and continue</button>
+<p style="margin: 16px 0 0; font-size: 13px; color: #5B6B63; text-align: center; line-height: 1.5">Tip: type the code here. Opening the email on another phone still works.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

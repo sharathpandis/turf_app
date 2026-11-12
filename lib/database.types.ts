@@ -545,7 +545,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      booking_source: "phone" | "walk_in" | "whatsapp" | "other_app"
+      booking_source:
+        | "phone"
+        | "walk_in"
+        | "whatsapp"
+        | "other_app"
+        | "booking_link"
       booking_status:
         | "pending_payment"
         | "confirmed"
@@ -688,7 +693,13 @@ export const Constants = {
   },
   public: {
     Enums: {
-      booking_source: ["phone", "walk_in", "whatsapp", "other_app"],
+      booking_source: [
+        "phone",
+        "walk_in",
+        "whatsapp",
+        "other_app",
+        "booking_link",
+      ],
       booking_status: [
         "pending_payment",
         "confirmed",

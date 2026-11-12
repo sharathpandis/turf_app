@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Calendar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E6B43}a:hover{color:#09502F}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F4; font-family: Inter, sans-serif; color: #13201A; display: flex; flex-direction: column; position: relative; overflow: hidden">
+<div style="background: #FFFFFF; padding: 52px 20px 12px; border-bottom: 1px solid #E2E6E1; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<button style="border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 6px; font: 700 20px 'Space Grotesk', sans-serif; color: #13201A">Green Arena<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#13201A" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+<button style="height: 36px; padding: 0 14px; border: 1.5px solid #E2E6E1; border-radius: 999px; background: #FFFFFF; font: 600 13px Inter, sans-serif; color: #13201A">Today</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+<button style="height: 56px; border: 0; border-radius: 12px; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #5B6B63">Mon</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">16</span></button>
+<button style="height: 56px; border: 0; border-radius: 12px; background: #0E6B43; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #D6EDE0">Tue</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #FFFFFF">17</span></button>
+<button style="height: 56px; border: 0; border-radius: 12px; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #5B6B63">Wed</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">18</span></button>
+<button style="height: 56px; border: 0; border-radius: 12px; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #5B6B63">Thu</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">19</span></button>
+<button style="height: 56px; border: 0; border-radius: 12px; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #5B6B63">Fri</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">20</span></button>
+<button style="height: 56px; border: 0; border-radius: 12px; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #5B6B63">Sat</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">21</span></button>
+<button style="height: 56px; border: 0; border-radius: 12px; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: Inter, sans-serif"><span style="font-size: 11px; color: #5B6B63">Sun</span><span style="font: 600 17px 'Space Grotesk', sans-serif; color: #13201A">22</span></button>
+</div>
+<div style="display: flex; gap: 8px">
+<button style="height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: #13201A; color: #FFFFFF; font: 600 13px Inter, sans-serif">Turf 1</button>
+<button style="height: 36px; padding: 0 14px; border: 1.5px solid #E2E6E1; border-radius: 999px; background: #FFFFFF; color: #13201A; font: 600 13px Inter, sans-serif">Turf 2</button>
+<button style="height: 36px; padding: 0 14px; border: 1.5px solid #E2E6E1; border-radius: 999px; background: #FFFFFF; color: #13201A; font: 600 13px Inter, sans-serif">Pickleball A</button>
+</div>
+</div>
+<div style="padding: 12px 20px 0; display: flex; justify-content: space-between; font-size: 13px; color: #5B6B63">
+<span><strong style="color: #13201A">9 of 19</strong> slots booked</span>
+<span>₹11,500 today</span>
+</div>
+<div style="padding: 10px 20px 0; display: flex; flex-direction: column; gap: 8px; flex: 1; overflow: hidden">
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center">
+<div style="font: 600 14px 'Space Grotesk', sans-serif; color: #5B6B63">5 PM</div>
+<button style="height: 58px; border-radius: 12px; border: 1.5px solid #0E6B43; background: #FFFFFF; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; font-family: Inter, sans-serif"><span style="font-size: 14px; font-weight: 600; color: #0E6B43">Free</span><span style="font-size: 13px; color: #5B6B63">₹1,000</span></button>
+</div>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center">
+<div style="font: 600 14px 'Space Grotesk', sans-serif; color: #5B6B63">6 PM</div>
+<button style="height: 58px; border-radius: 12px; border: 0; background: #0E6B43; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; font-family: Inter, sans-serif; text-align: left"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: #FFFFFF">Rahul FC</span><span style="font-size: 12px; color: #D6EDE0">WhatsApp · advance paid</span></span><span style="font-size: 12px; font-weight: 600; color: #0E6B43; background: #FFFFFF; padding: 3px 8px; border-radius: 999px">₹1,200 due</span></button>
+</div>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center">
+<div style="font: 600 14px 'Space Grotesk', sans-serif; color: #5B6B63">7 PM</div>
+<button style="height: 58px; border-radius: 12px; border: 1.5px solid #E9A23B; background: #FFF1D6; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; font-family: Inter, sans-serif; text-align: left"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: #7A4A00">Held · paying</span><span style="font-size: 12px; color: #7A4A00">Booking link · Karthik</span></span><span style="font: 600 15px 'Space Grotesk', sans-serif; color: #7A4A00">3:12</span></button>
+</div>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center">
+<div style="font: 600 14px 'Space Grotesk', sans-serif; color: #5B6B63">8 PM</div>
+<button style="height: 58px; border-radius: 12px; border: 0; background: #0E6B43; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; font-family: Inter, sans-serif; text-align: left"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600; color: #FFFFFF">Sunday Strikers</span><span style="font-size: 12px; color: #D6EDE0">Phone · paid in full</span></span><span style="font-size: 12px; font-weight: 600; color: #0E6B43; background: #FFFFFF; padding: 3px 8px; border-radius: 999px">Paid</span></button>
+</div>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center">
+<div style="font: 600 14px 'Space Grotesk', sans-serif; color: #5B6B63">9 PM</div>
+<button style="height: 58px; border-radius: 12px; border: 0; background: repeating-linear-gradient(135deg, #ECEEEC 0 8px, #E0E4E0 8px 16px); display: flex; justify-content: space-between; align-items: center; padding: 0 14px; font-family: Inter, sans-serif"><span style="font-size: 14px; font-weight: 600; color: #3F4A44">Blocked · Playo booking</span></button>
+</div>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center">
+<div style="font: 600 14px 'Space Grotesk', sans-serif; color: #5B6B63">10 PM</div>
+<button style="height: 58px; border-radius: 12px; border: 1.5px solid #0E6B43; background: #FFFFFF; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; font-family: Inter, sans-serif"><span style="font-size: 14px; font-weight: 600; color: #0E6B43">Free</span><span style="font-size: 13px; color: #5B6B63">₹1,500</span></button>
+</div>
+</div>
+<button aria-label="Add booking" style="position: absolute; right: 20px; bottom: 100px; height: 56px; padding: 0 20px; border: 0; border-radius: 16px; background: #0E6B43; color: #FFFFFF; font: 600 15px Inter, sans-serif; display: flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(14,107,67,0.28)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Booking</button>
+<nav style="height: 80px; background: #FFFFFF; border-top: 1px solid #E2E6E1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: 12px; box-sizing: border-box">
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #0E6B43; font-size: 12px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E6B43" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="16" y1="2" x2="16" y2="6"></line></svg>Calendar</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6B63; font-size: 12px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6B63" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="4"></circle><path d="M2 21c0-4 3-6 7-6s7 2 7 6"></path><path d="M17 4a4 4 0 0 1 0 8"></path></svg>Customers</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6B63; font-size: 12px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6B63" stroke-width="2" aria-hidden="true"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg>More</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { OTP_LENGTH } from "@/lib/auth-input";
 import { sendOtp, verifyOtp } from "./actions";
 
-const RESEND_SECONDS = 30;
+const RESEND_SECONDS = 60;
+
+const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
 export function LoginForm() {
   const [step, setStep] = useState<"email" | "otp">("email");
@@ -55,31 +56,36 @@ export function LoginForm() {
   if (step === "email") {
     return (
       <form
-        className="flex flex-col gap-4"
+        className="mt-14 flex flex-1 flex-col"
         onSubmit={(e) => {
           e.preventDefault();
           send();
         }}
       >
         <div className="flex flex-col gap-2">
-          <Label htmlFor="email" className="text-base">
-            Email address
-          </Label>
+          <h1 className="text-[28px] font-bold">Log in</h1>
+          <p className="text-base leading-normal text-muted-ink">
+            Enter your email and we will send you a 6-digit code.
+          </p>
+        </div>
+        <label htmlFor="email" className="mt-8 flex flex-col gap-1.5 text-sm text-muted-ink">
+          Email address
           <Input
             id="email"
             type="email"
             inputMode="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="h-12 text-base"
+            className="h-12 rounded-xl border-[1.5px] bg-card px-3.5 text-base font-medium text-ink"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             aria-invalid={Boolean(error)}
             autoFocus
           />
-        </div>
-        {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
-        <Button type="submit" className="h-12 w-full text-base" disabled={pending || !email.includes("@")}>
+        </label>
+        {error && <p role="alert" className="mt-3 text-sm text-danger">{error}</p>}
+        <div className="flex-1" />
+        <Button type="submit" className="h-13 w-full rounded-xl text-base font-semibold" disabled={pending || !email.includes("@")}>
           {pending ? "Sending…" : "Send code"}
         </Button>
       </form>
@@ -87,45 +93,15 @@ export function LoginForm() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="mt-14 flex flex-1 flex-col">
       <div className="flex flex-col gap-2">
-        <Label htmlFor="otp" className="text-base">
-          Enter the {OTP_LENGTH}-digit code sent to {email}
-        </Label>
-        <InputOTP
-          id="otp"
-          maxLength={OTP_LENGTH}
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          value={code}
-          onChange={setCode}
-          onComplete={verify}
-          disabled={pending}
-          autoFocus
-        >
-          <InputOTPGroup>
-            {Array.from({ length: OTP_LENGTH }, (_, i) => (
-              <InputOTPSlot key={i} index={i} className="h-12 w-9 text-lg" />
-            ))}
-          </InputOTPGroup>
-        </InputOTP>
-      </div>
-      {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
-      <Button className="h-12 w-full text-base" disabled={pending || code.length !== OTP_LENGTH} onClick={() => verify(code)}>
-        {pending ? "Checking…" : "Verify and continue"}
-      </Button>
-      <div className="flex items-center justify-between">
-        <Button
-          variant="ghost"
-          className="h-11 px-2"
-          disabled={pending || secondsLeft > 0}
-          onClick={send}
-        >
-          {secondsLeft > 0 ? `Resend code in ${secondsLeft}s` : "Resend code"}
-        </Button>
-        <Button
-          variant="ghost"
-          className="h-11 px-2"
+        <h1 className="text-[28px] font-bold">Enter your code</h1>
+        <p className="text-base leading-normal text-muted-ink">
+          We sent a {OTP_LENGTH}-digit code to <strong className="break-all text-ink">{email}</strong>
+        </p>
+        <button
+          type="button"
+          className="min-h-11 self-start text-sm font-semibold text-brand"
           disabled={pending}
           onClick={() => {
             setStep("email");
@@ -133,8 +109,54 @@ export function LoginForm() {
           }}
         >
           Change email
-        </Button>
+        </button>
       </div>
+      <InputOTP
+        aria-label="Login code"
+        maxLength={OTP_LENGTH}
+        inputMode="numeric"
+        autoComplete="one-time-code"
+        value={code}
+        onChange={setCode}
+        onComplete={verify}
+        disabled={pending}
+        containerClassName="mt-4 w-full"
+        autoFocus
+      >
+        <InputOTPGroup className="grid w-full grid-cols-6 gap-2">
+          {Array.from({ length: OTP_LENGTH }, (_, i) => (
+            <InputOTPSlot
+              key={i}
+              index={i}
+              className="h-14 min-w-0 w-full rounded-xl border-[1.5px] bg-card font-heading text-[22px] font-semibold first:rounded-xl first:border-l last:rounded-xl data-[active=true]:border-2 data-[active=true]:bg-brand-soft data-[active=true]:ring-0"
+            />
+          ))}
+        </InputOTPGroup>
+      </InputOTP>
+      {error && <p role="alert" className="mt-3 text-sm text-danger">{error}</p>}
+      <div className="mt-4 flex items-center justify-between text-sm text-muted-ink">
+        <span>Code valid for 10 minutes</span>
+        {secondsLeft > 0 ? (
+          <span>
+            Resend in <strong className="text-ink">{mmss(secondsLeft)}</strong>
+          </span>
+        ) : (
+          <button type="button" className="min-h-11 font-semibold text-brand" disabled={pending} onClick={send}>
+            Resend code
+          </button>
+        )}
+      </div>
+      <div className="flex-1" />
+      <Button
+        className="h-13 w-full rounded-xl text-base font-semibold"
+        disabled={pending || code.length !== OTP_LENGTH}
+        onClick={() => verify(code)}
+      >
+        {pending ? "Checking…" : "Verify and continue"}
+      </Button>
+      <p className="mt-4 text-center text-[13px] leading-normal text-muted-ink">
+        Tip: type the code here. Opening the email on another phone still works.
+      </p>
     </div>
   );
 }

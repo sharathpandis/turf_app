@@ -1,18 +1,12 @@
-import { createClient } from "@/lib/supabase/server";
+import { getTurfs } from "@/lib/turf";
+import { TurfSwitcher } from "./turf-switcher";
 
-// Shows the owner's turf name. The turf switcher comes once a owner can have several turfs (Sprint 2).
+// Server component: reads the owner's turfs through RLS.
 export async function TurfHeader() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("turfs")
-    .select("name")
-    .order("created_at")
-    .limit(1)
-    .maybeSingle();
-
-  return <span className="truncate text-lg font-semibold">{data?.name ?? "No turf yet"}</span>;
+  const { turfs, current } = await getTurfs();
+  return <TurfSwitcher turfs={turfs} current={current} />;
 }
 
 export function TurfHeaderSkeleton() {
-  return <span className="block h-6 w-40 animate-pulse rounded bg-muted" />;
+  return <div className="h-11 w-full animate-pulse rounded-xl bg-muted" />;
 }

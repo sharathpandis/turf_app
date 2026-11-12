@@ -11,7 +11,7 @@ Full table list, columns and relation diagram: `docs/SCHEMA.md`.
 - **courts** — belong to a turf: slot length, open/close time (close at or before open means past midnight), base price.
 - **price_bands** — peak/off-peak price per court: days, time window, price, tag, bookable on WhatsApp.
 - **customers** — per owner, unique by phone.
-- **bookings** — court, customer, time range (`tstzrange`), status, source, price, override flag, hold expiry, Razorpay order id (`payment_order_id`), payment proof (unused, tech debt), who created it.
+- **bookings** — court, customer, time range (`tstzrange`), status, source (`phone`, `walk_in`, `whatsapp`, `other_app`, `booking_link`), price, override flag, hold expiry, Razorpay order id (`payment_order_id`), payment proof (unused, tech debt), who created it.
 - **blocks** — blocked time on a court with a reason (maintenance, Playo / Hudle / other app, private event).
 - **payments** — advance, balance or refund per booking: amount, mode (`online` = Razorpay; `cash`/`upi` = recorded by hand at the counter), gateway and `gateway_payment_id` (unique, so one webhook = one row), who recorded it. Payment status is calculated from these.
 - **court_occupancy** — system table behind the overlap rule (below). Not written by the app.

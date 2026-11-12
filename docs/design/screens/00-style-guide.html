@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Style guide</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E6B43}a:hover{color:#09502F}
+</style>
+</helmet>
+<div style="width: 1100px; height: 780px; box-sizing: border-box; padding: 56px; background: #F6F7F4; font-family: Inter, sans-serif; color: #13201A; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-size: 13px; font-weight: 600; color: #5B6B63; letter-spacing: 0.08em; text-transform: uppercase">Design system</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700">Turf App</h1>
+</div>
+<div style="font-size: 15px; color: #5B6B63; max-width: 420px; text-align: right">Mobile-first. One main action per screen. Status is shown by colour and by a word.</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+<section style="background: #FFFFFF; border: 1px solid #E2E6E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Colours</h2>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #0E6B43"></div><div style="font-size: 12px; font-weight: 600">Turf green</div><div style="font-size: 12px; color: #5B6B63">#0E6B43 · actions</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #E3F1E9"></div><div style="font-size: 12px; font-weight: 600">Green soft</div><div style="font-size: 12px; color: #5B6B63">#E3F1E9 · selected</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #E9A23B"></div><div style="font-size: 12px; font-weight: 600">Amber</div><div style="font-size: 12px; color: #5B6B63">#E9A23B · held</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #B42318"></div><div style="font-size: 12px; font-weight: 600">Red</div><div style="font-size: 12px; color: #5B6B63">#B42318 · cancel</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #13201A"></div><div style="font-size: 12px; font-weight: 600">Ink</div><div style="font-size: 12px; color: #5B6B63">#13201A · text</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #5B6B63"></div><div style="font-size: 12px; font-weight: 600">Muted</div><div style="font-size: 12px; color: #5B6B63">#5B6B63 · labels</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #F6F7F4; border: 1px solid #E2E6E1"></div><div style="font-size: 12px; font-weight: 600">Ground</div><div style="font-size: 12px; color: #5B6B63">#F6F7F4 · page</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 56px; border-radius: 10px; background: #E2E6E1"></div><div style="font-size: 12px; font-weight: 600">Line</div><div style="font-size: 12px; color: #5B6B63">#E2E6E1 · borders</div></div>
+</div>
+</section>
+<section style="background: #FFFFFF; border: 1px solid #E2E6E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Type</h2>
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700">Screen title 28</div>
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600">Section 20 · ₹1,500 · 7:00 PM</div>
+<div style="font-size: 16px">Body 16 — readable outdoors on a phone.</div>
+<div style="font-size: 14px; color: #5B6B63">Label 14 — field labels and hints.</div>
+<div style="font-size: 12px; font-weight: 600; color: #5B6B63; letter-spacing: 0.06em; text-transform: uppercase">Caption 12</div>
+<div style="font-size: 13px; color: #5B6B63">Headings and numbers: Space Grotesk. Text: Inter.</div>
+</section>
+<section style="background: #FFFFFF; border: 1px solid #E2E6E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Slot states</h2>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<div style="height: 64px; border-radius: 12px; border: 1.5px solid #0E6B43; background: #FFFFFF; display: flex; flex-direction: column; justify-content: center; padding: 0 12px"><div style="font-size: 14px; font-weight: 600; color: #0E6B43">Free</div><div style="font-size: 12px; color: #5B6B63">tap to book</div></div>
+<div style="height: 64px; border-radius: 12px; border: 1.5px solid #E9A23B; background: #FFF1D6; display: flex; flex-direction: column; justify-content: center; padding: 0 12px"><div style="font-size: 14px; font-weight: 600; color: #7A4A00">Held</div><div style="font-size: 12px; color: #7A4A00">paying · 3:12</div></div>
+<div style="height: 64px; border-radius: 12px; background: #0E6B43; display: flex; flex-direction: column; justify-content: center; padding: 0 12px"><div style="font-size: 14px; font-weight: 600; color: #FFFFFF">Booked</div><div style="font-size: 12px; color: #D6EDE0">Rahul FC</div></div>
+<div style="height: 64px; border-radius: 12px; background: repeating-linear-gradient(135deg, #ECEEEC 0 8px, #E0E4E0 8px 16px); display: flex; flex-direction: column; justify-content: center; padding: 0 12px"><div style="font-size: 14px; font-weight: 600; color: #3F4A44">Blocked</div><div style="font-size: 12px; color: #3F4A44">Playo</div></div>
+</div>
+</section>
+<section style="background: #FFFFFF; border: 1px solid #E2E6E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Buttons and fields</h2>
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<button style="height: 48px; padding: 0 22px; border: 0; border-radius: 12px; background: #0E6B43; color: #FFFFFF; font: 600 15px Inter, sans-serif">Primary</button>
+<button style="height: 48px; padding: 0 22px; border: 1.5px solid #E2E6E1; border-radius: 12px; background: #FFFFFF; color: #13201A; font: 600 15px Inter, sans-serif">Secondary</button>
+<button style="height: 48px; padding: 0 22px; border: 0; border-radius: 12px; background: #FDECEA; color: #B42318; font: 600 15px Inter, sans-serif">Cancel booking</button>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #5B6B63">Phone number<input value="98765 43210" style="height: 48px; border: 1.5px solid #E2E6E1; border-radius: 12px; padding: 0 14px; font: 500 16px Inter, sans-serif; color: #13201A; background: #FFFFFF"></label>
+</section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1100,"height":780}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

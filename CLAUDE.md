@@ -48,6 +48,7 @@ Full spec: `docs/requirements.md`. Read ONLY the section named in the task, not 
 - After changes: run `npm run lint` and `npm run build`; fix errors before saying done.
 - Write tests for booking logic (overlap, pricing bands, payment status).
 - Don't add packages without saying why.
+- UI follows docs/design/. Mobile-first, desktop layout at `lg`.
 - Keep replies short. Don't repeat unchanged code.
 - Start each session with /start; finish each feature with /done.
 - docs/PROGRESS.md is the source of truth for project state.
