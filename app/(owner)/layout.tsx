@@ -3,7 +3,9 @@ import { BottomNav } from "@/components/shell/bottom-nav";
 import { Sidebar } from "@/components/shell/sidebar";
 import { Logo } from "@/components/shell/logo";
 import { TurfHeader, TurfHeaderSkeleton } from "@/components/shell/turf-header";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getTurfs } from "@/lib/turf";
 
 async function SidebarWithEmail() {
   const supabase = await createClient();
@@ -20,9 +22,19 @@ async function SidebarWithEmail() {
   );
 }
 
+// An owner with no turf yet goes to the setup wizard.
+async function SetupGuard() {
+  const { current } = await getTurfs();
+  if (!current) redirect("/setup");
+  return null;
+}
+
 export default function OwnerLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="flex min-h-dvh">
+      <Suspense fallback={null}>
+        <SetupGuard />
+      </Suspense>
       <Suspense fallback={<aside className="hidden w-58 shrink-0 border-r border-line bg-card lg:block" />}>
         <SidebarWithEmail />
       </Suspense>

@@ -6,6 +6,7 @@ Project state: status, decisions, issues. Task list and next task: [dev-plan.md]
 Phase 1A (owner app). Database schema (incl. slot lock and online-payment functions) live on the remote dev project (turf-app-dev); login and app shell built. Sprint 1: S1.1–S1.4 done. Change set 01 applied 2026-11-12.
 
 ## Done (newest first)
+- 2026-11-13 — S2.1 Setup wizard: `/setup` 4 steps (turf → courts → prices → booking settings), resumes where the owner left off, complete when `booking_code` is set; owners with no turf are redirected there. Files: `app/setup/*`, `app/(owner)/layout.tsx`, `components/ui/{dialog,switch,textarea}.tsx`. Verified: data saved in `turfs`, `courts`, `price_bands`.
 - 2026-11-12 — S1.5 App shell: bottom nav (Calendar, More), turf-name header, manifest + icons; tested on a phone over an ngrok HTTPS tunnel: login, layout and Add to Home Screen work. Files: `app/(owner)/layout.tsx`, `components/shell/*`, `app/manifest.ts`, `public/icons/*`.
 - 2026-11-12 — Change set 01: migration `20261112000001_booking_lock_razorpay.sql` (no super admin, owner plans, Razorpay-only, `book_slot`, `confirm_online_payment`, `expire-holds` cron), tests `supabase/tests/booking_lock.sql` (13 checks pass on turf-app-dev), `lib/notify` stub, docs updated.
 - 2026-11-10 — S1.2 Prove overlap rule: 10 checks pass on turf-app-dev (overlap, booking vs block, block vs booking, reschedule into block rejected; back-to-back, other court, cancelled, rebook accepted). Files: `supabase/tests/overlap_rule.sql`.

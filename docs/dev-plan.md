@@ -81,8 +81,8 @@ Goal: a new owner sets up a real turf in under 10 minutes, and the app knows eve
 
 **Tasks**
 
-- [ ] **S2.1 Setup wizard (screen 2)** — follow mockup 02; 4 steps: turf details → courts → prices → booking settings (advance, hold minutes, cancellation policy, booking code). No UPI step.
-- [ ] **S2.2 Courts and pricing settings (screen 8)** — follow mockup 09 (desktop) and the same content single-column on phone; label the `whatsapp_bookable` switch "Bookable online" (WhatsApp + booking link). Edit courts and hours, peak/off-peak bands, slot tags, "bookable on WhatsApp" per band, close a court for dates.
+- [x] **S2.1 Setup wizard (screen 2)** — follow mockup 02; 4 steps: turf details → courts → prices → booking settings (advance, hold minutes, cancellation policy, booking code). No UPI step. (2026-11-13)
+- [x] **S2.2 Courts and pricing settings (screen 8)** — follow mockup 09 (desktop) and the same content single-column on phone; label the `whatsapp_bookable` switch "Bookable online" (WhatsApp + booking link). Edit courts and hours, peak/off-peak bands, slot tags, "bookable on WhatsApp" per band, close a court for dates. (2026-11-13)
 - [ ] **S2.3 Slot engine** — one shared function: given a court and a date, return every slot with price, tag and status (free, pending, booked, blocked). Handles courts open past midnight. Unit tests for pricing bands and midnight.
 - [ ] **S2.4 Turf settings (part of screen 10)** — same fields as setup step 4: advance rule, hold minutes, cancellation policy text, booking code.
 
