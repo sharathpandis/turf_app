@@ -56,3 +56,4 @@ Phase 1A (owner app). Database schema (incl. slot lock and online-payment functi
 - `private.*` functions are not reachable through the Supabase API; S4.1 needs a service-role-only wrapper or direct DB connection.
 - `bookings.payment_proof_url` and enum value `rejected` are now unused.
 - The 'two simultaneous bookings' SQL test is sequential (one session); the exclusion constraint is the actual guarantee.
+- 2026-11-13 — S1.8 done: design tokens in the Tailwind/shadcn theme, sidebar at `lg`, bottom nav below, turf switcher stored in cookie `turf_id`. Reason: designs approved, desktop layout is in Phase 1.

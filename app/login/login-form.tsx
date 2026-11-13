@@ -123,7 +123,10 @@ export function LoginForm() {
         containerClassName="mt-4 w-full"
         autoFocus
       >
-        <InputOTPGroup className="grid w-full grid-cols-6 gap-2">
+        <InputOTPGroup
+          className="grid w-full gap-2"
+          style={{ gridTemplateColumns: `repeat(${OTP_LENGTH}, minmax(0, 1fr))` }}
+        >
           {Array.from({ length: OTP_LENGTH }, (_, i) => (
             <InputOTPSlot
               key={i}

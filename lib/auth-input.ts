@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Must match "Email OTP Length" in Supabase (Authentication > Providers > Email).
-export const OTP_LENGTH = 8;
+export const OTP_LENGTH = 6;
 
 export const emailSchema = z
   .string()

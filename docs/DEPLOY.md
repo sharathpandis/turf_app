@@ -30,3 +30,14 @@ Install: `brew install cloudflared`.
   3. `cloudflared tunnel route dns turf-dev dev-turf.<our-domain>`
   4. Create `~/.cloudflared/config.yml` with `tunnel: turf-dev`, `credentials-file: ~/.cloudflared/<id>.json` and an ingress rule `hostname: dev-turf.<our-domain>`, `service: http://localhost:3000`, plus a final `service: http_status:404`.
   5. `cloudflared tunnel run turf-dev` while `npm run dev` runs. Use `https://dev-turf.<our-domain>/api/...` as the webhook URL.
+
+## Supabase Auth settings (set by hand on every new Supabase project)
+
+These live in the Supabase dashboard, not in migrations. `supabase/config.toml` holds the same values;
+`supabase config push` can apply them, or set them by hand:
+- Authentication -> Providers -> Email: **Email OTP Length = 6** (must match `OTP_LENGTH` in
+  `lib/auth-input.ts`), OTP expiry 3600 s.
+- Authentication -> Emails: templates "Magic link" and "Confirm signup" show the code `{{ .Token }}`
+  (copy from `supabase/templates/login_code.html`).
+- Custom SMTP (Gmail on dev; company sender on production) — without it Supabase locks the templates.
+- URL Configuration: Site URL + Redirect URLs (see First deploy, step 4).

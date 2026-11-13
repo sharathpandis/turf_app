@@ -50,7 +50,7 @@ Goal: an owner can log in on a phone and land on an empty home screen, backed by
 - [x] **S1.5 App shell** — bottom nav (Calendar, More; Customers tab arrives with S6.1), header with the turf name (turf switcher arrives in Sprint 2), PWA manifest + icons, "Add to Home Screen" works. (2026-11-12)
 - [x] **S1.6 Deploy** — host on Cloudflare Workers (OpenNext adapter), build variables and secrets. Live at https://turf-app.sharath-dev.workers.dev; email OTP login and Add to Home Screen verified on an Android phone. Steps in `docs/DEPLOY.md`. (2026-11-12)
 - [ ] **S1.7 Branch preview URLs** — connect the GitHub repo in Cloudflare Workers Builds (production branch `main`, non-main branches build previews). Done when: pushing a test branch gives its own preview link and `main` deploys by itself. Steps in `docs/DEPLOY.md`. Moved out of S1.6, to do later.
-- [ ] **S1.8 Design system + responsive shell** — design tokens (colours, fonts, radius) in the Tailwind theme / shadcn variables; app shell: bottom nav below `lg`, left sidebar at `lg`+ (Calendar, Courts & prices, Turf settings; Customers appears with S6.1); turf switcher; restyle `/login` to mockup 01 (6-digit code). Done when: phone and desktop both match the mockups.
+- [x] **S1.8 Design system + responsive shell** — design tokens (colours, fonts, radius) in the Tailwind theme / shadcn variables; app shell: bottom nav below `lg`, left sidebar at `lg`+ (Calendar, Courts & prices, Turf settings; Customers appears with S6.1); turf switcher; restyle `/login` to mockup 01 (6-digit code). Done when: phone and desktop both match the mockups. (2026-11-13)
 
 **Prompts**
 
@@ -265,5 +265,7 @@ Five outside dependencies can stall the build. Start all of them now; none of th
 | 2026-11-12 | S1.5 scope: Customers tab deferred to S6.1 and turf switcher to Sprint 2; shell, manifest and icons verified on a production build; task stays unticked until Add to Home Screen is confirmed on a phone | Nothing to show on a Customers screen yet; one turf per owner until Sprint 2 |
 | 2026-11-12 | S1.5 ticked after a phone test over an HTTPS tunnel: login, layout and Add to Home Screen work | Done when met |
 | 2026-11-12 | Added S1.8 Design system + responsive shell (tokens, bottom nav / sidebar at `lg`, turf switcher, restyled `/login`) | Designs approved; desktop layout is in Phase 1 |
+| 2026-11-13 | S1.8 ticked: design tokens, Inter + Space Grotesk, sidebar at `lg` and 4-tab bottom nav (Calendar, Courts, Settings, More) below, turf switcher (cookie `turf_id`), `/courts` and `/settings` placeholders, `/login` restyled | Done when met (phone and desktop checked) |
+| 2026-11-13 | S1.8 ticked: design tokens, Inter + Space Grotesk, sidebar at `lg` / 4-tab bottom nav (Calendar, Courts, Settings, More) below, turf switcher (cookie `turf_id`), `/courts` and `/settings` placeholders, `/login` restyled | Done when met (phone + desktop checked) |
 | 2026-11-12 | S2.1, S2.2, S2.4, S3.1, S3.3, S3.4, S4.3, S4.4 now follow the mockups in `docs/design/`; S2.1 is 4 steps (details, courts, prices, booking settings); S3.1 week view removed; "How we work" gets a UI-task line | Mockups define phone and desktop layouts |
 | 2026-11-12 | Migration 20261112000002 adds `booking_link` to `booking_source` (used by S4.4) | Booking-link bookings needed their own source |
